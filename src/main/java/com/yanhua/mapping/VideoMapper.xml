@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yanhua.dao.IVideoDao" >
+  <resultMap id="BaseResultMap" type="com.yanhua.entity.Video" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="videodesc" property="videodesc" jdbcType="VARCHAR" />
+    <result column="uploadtime" property="uploadtime" jdbcType="TIMESTAMP" />
+    <result column="videourl" property="videourl" jdbcType="VARCHAR" />
+    <result column="videoname" property="videoname" jdbcType="VARCHAR" />
+    <result column="userid" property="userid" jdbcType="INTEGER" />
+    <result column="coverurl" property="coverurl" jdbcType="VARCHAR" />
+    <result column="fileid" property="fileid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, videodesc, uploadtime, videourl, videoname, userid, coverurl, fileid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from video
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from video
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="saveVideo" parameterType="com.yanhua.entity.Video" >
+    insert into video (id, videodesc, uploadtime,
+      videourl, videoname, userid,
+      coverurl, fileid)
+    values (#{id,jdbcType=INTEGER}, #{videodesc,jdbcType=VARCHAR}, #{uploadtime,jdbcType=TIMESTAMP},
+      #{videourl,jdbcType=VARCHAR}, #{videoname,jdbcType=VARCHAR}, #{userid,jdbcType=INTEGER},
+      #{coverurl,jdbcType=VARCHAR}, #{fileid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yanhua.entity.Video" >
+    insert into video
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="videodesc != null" >
+        videodesc,
+      </if>
+      <if test="uploadtime != null" >
+        uploadtime,
+      </if>
+      <if test="videourl != null" >
+        videourl,
+      </if>
+      <if test="videoname != null" >
+        videoname,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="coverurl != null" >
+        coverurl,
+      </if>
+      <if test="fileid != null" >
+        fileid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="videodesc != null" >
+        #{videodesc,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadtime != null" >
+        #{uploadtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="videourl != null" >
+        #{videourl,jdbcType=VARCHAR},
+      </if>
+      <if test="videoname != null" >
+        #{videoname,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="coverurl != null" >
+        #{coverurl,jdbcType=VARCHAR},
+      </if>
+      <if test="fileid != null" >
+        #{fileid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yanhua.entity.Video" >
+    update video
+    <set >
+      <if test="videodesc != null" >
+        videodesc = #{videodesc,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadtime != null" >
+        uploadtime = #{uploadtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="videourl != null" >
+        videourl = #{videourl,jdbcType=VARCHAR},
+      </if>
+      <if test="videoname != null" >
+        videoname = #{videoname,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="coverurl != null" >
+        coverurl = #{coverurl,jdbcType=VARCHAR},
+      </if>
+      <if test="fileid != null" >
+        fileid = #{fileid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yanhua.entity.Video" >
+    update video
+    set videodesc = #{videodesc,jdbcType=VARCHAR},
+      uploadtime = #{uploadtime,jdbcType=TIMESTAMP},
+      videourl = #{videourl,jdbcType=VARCHAR},
+      videoname = #{videoname,jdbcType=VARCHAR},
+      userid = #{userid,jdbcType=INTEGER},
+      coverurl = #{coverurl,jdbcType=VARCHAR},
+      fileid = #{fileid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+  <update id="updateByFileIdFromCallBack" parameterType="com.yanhua.entity.Video" >
+    update video
+    set coverurl = #{coverurl}
+    where fileid = #{fileid}
+  </update>
+
+  <select id="listVideo" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from video
+    where userid = #{userid,jdbcType=INTEGER}
+  </select>
+</mapper>

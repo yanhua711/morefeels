@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>视频上传</title>
+    <script type="text/javascript" src="${ctxPath}/resources/js/base/jquery.min.js"></script>
+    <script type="text/javascript" src="${ctxPath}/resources/js/base/jquery.form.min.js"></script>
+    <script type="text/javascript" src="${ctxPath}/resources/js/video/uploadVideo.js"></script>
+</head>
+<body>
+<h1>Welcome</h1>
+
+<form enctype="multipart/form-data">
+    <input name="files" type="file" accept="video/*"/><br/>
+    <input type="hidden" name="userId" value="12"/><br/>
+    视频名称:<input name="fileName" value=""/><br/>
+    视频介绍:<textarea name="fileIntro" cols="30" rows="6" value="" placeholder="请输入视频简介"></textarea><br/>
+    <button>提交</button>
+</form>
+
+<a href="videoListView.jhtml?userId=12">视频列表</a>
+</body>
+</html>

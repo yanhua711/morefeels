@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>视频列表</title>
+    <script type="text/javascript" src="${ctxPath}/resources/js/base/jquery.min.js"></script>
+    <script type="text/javascript" src="${ctxPath}/resources/js/base/jquery.form.min.js"></script>
+    <script type="text/javascript" src="${ctxPath}/resources/js/video/videoList.js"></script>
+</head>
+<body>
+<h1>Welcome</h1>
+
+<table>
+    <tbody>
+    <tr>
+        <td>
+            视频名称
+        </td>
+        <td>
+            视频封面
+        </td>
+        <td>
+            预览占位
+        </td>
+    </tr>
+    [% for (var video in videoList!) { %]
+    <tr>
+        <td>
+            ${video.videoname!}
+        </td>
+        <td>
+            <img src="${video.coverurl!}" alt="视频图片"/>
+        </td>
+        <td>
+            <input name="preview" type="button" fileId="${video.fileid!}" value="预览"/>
+            <input name="close" type="button" fileId="${video.fileid!}" value="关闭"/>
+            <video style="display: none;" width="320" height="240" controls>
+                <source src="${video.videourl!}">
+                <object data="movie.mp4" width="320" height="240">
+                    <embed width="320" height="240" src="movie.swf">
+                </object>
+            </video>
+
+        </td>
+    </tr>
+    [% } %]
+    </tbody>
+</table>
+</body>
+</html>
